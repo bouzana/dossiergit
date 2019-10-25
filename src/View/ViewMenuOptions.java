@@ -5,6 +5,7 @@ import Model.Menu;
 import Tools.Path;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
@@ -12,14 +13,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
-import java.security.AllPermission;
-
 
 public class ViewMenuOptions {
 
     private Text titre;
     private Menu model2;
     private ImageView imgBg;
+    private ImageView  imgbtn;
     private MediaView bgVideo;
     private Group root2;
 
@@ -34,6 +34,7 @@ public class ViewMenuOptions {
         this.root2 = root2;
         this.model2 = model2;
         initBackground();
+       /* btnBackground();*/
         initTitre();
         setVueCompleteOptions();
     }
@@ -56,9 +57,15 @@ public class ViewMenuOptions {
         imgBg.setFitHeight((int) primaryScreenBounds.getHeight());
         imgBg.setFitWidth((int) primaryScreenBounds.getWidth());
     }
+
+    /*private void btnBackground() {
+        imgbtn= new ImageView("Asset/Images/btn1.png");
+
+    }*/
     void setVueCompleteOptions() {
         root2.getChildren().add(imgBg);
         root2.getChildren().add(titre);
+        /*root2.getChildren().add(imgbtn);*/
     }
     /**
      * Ajoute a la vue tous les éléments composant le menu

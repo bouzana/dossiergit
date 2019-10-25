@@ -3,17 +3,13 @@ package View;
 import Controller.ControllerMenu;
 import Model.Menu;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
-import java.awt.*;
 
 import static Tools.Music.startMainMenuMusic;
 import static Tools.Music.Piou;
@@ -27,11 +23,12 @@ public class ViewHandler extends Application {
     private ControllerMenu controllerMenu;
     private Button btn;
     private Button btn2;
-    private Button btn21;
-    private Button btn22;
     private Button btn3;
     private Button btn4;
-    private Parent root;
+    private ImageView icon;
+    private String texteB;
+
+
     /**
      * Permet le lancement de l'application : méthode obligatoire pour JavaFX
      *
@@ -47,23 +44,18 @@ public class ViewHandler extends Application {
 //----------------------------------------------------------------------------------------------------------------------
 //Vue Menu Principal
 //----------------------------------------------------------------------------------------------------------------------
-       /* Parent root = FXMLLoader.load(getClass().getResource("uiDesigner.xml"));*/
+
 
 
 
         Group root = new Group();
         Scene scene = new Scene(root);
 
-        /*scene.getStylesheets().add("/css/bouton.css");*/
-
-
         model = new Menu();
 
         mp = new ViewMenuPrincipal(model, root);
 
         controllerMenu = new ControllerMenu(this, model);
-
-
 
         // Affichage du menu
 
@@ -77,11 +69,9 @@ public class ViewHandler extends Application {
         startMainMenuMusic();
 
 
-        btn = initButton(150, 380, "Jouer");
-        btn4 = initButton(150, 460, "Quitter");
-        btn2 = initButton(150, 420, "Retour");
-        btn21 = initButton(150, 460, "Option1");
-        btn22 = initButton(150, 500, "Option2");
+        btn = initButton(100, 150, "Jouer");
+        btn4 = initButton(100, 200, "Quitter");
+        btn2 = initButton(100, 250, "Retour");
 
         btn2.setOnAction(event -> primaryStage.setScene(scene));
         btn4.setOnAction(event -> primaryStage.close());
@@ -105,20 +95,20 @@ public class ViewHandler extends Application {
         Group root2 = new Group();
         Scene scene2 = new Scene(root2);
 
-        btn3 = initButton(150, 420, "Options");
+        btn3 = initButton(100, 300, "Option");
         btn3.setOnMouseEntered(mouseEvent -> Piou());
         btn3.setOnAction(event -> primaryStage.setScene(scene2));
         root.getChildren().add(btn3);
         model2 = new Menu();
 
+
+
         mo = new ViewMenuOptions(model2, root2);
         controllerMenu = new ControllerMenu(this, model2);
         // Affichage du menu
 
-        root2.getChildren().add(btn21);
-        root2.getChildren().add(btn22);
-        root2.getChildren().add(btn2);
 
+        root2.getChildren().add(btn2);
 
     }
 
@@ -135,15 +125,30 @@ public class ViewHandler extends Application {
     public ViewMenuPrincipal getMp() {
         return mp;
     }
-    public Button initButton(int longeur, int largeur, String texteDuBouton) {
+    public Button initButton(int longeur, int largeur, String texteB) {
 
+       /* Image image;
+        image = new Image(getClass().getResource("Asset/Images/btn1.png").toExternalForm());
+        ImageView icon = new ImageView(image);*/
+
+
+       /* Font buttonFont = Font.loadFont(getClass().getResource(
+                "/Asset/Images/btn1.png").toExternalForm(), 30);*/
+        ImageView icon = new ImageView("Asset/Images/btn1.png");
         // Création d'un bouton
         Button b = new Button();
+        b.setGraphic(icon);
         b.setLayoutX(longeur);
         b.setLayoutY(largeur);
-        b.setText(texteDuBouton);
+        b.setText(texteB);
+
+       /* b.setFont(buttonFont);*/
 
         return b;
     }
+
+
+
+
 
 }
