@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ControllerMenu;
+import Controller.ControllerOptions;
 import Model.Menu;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -18,17 +19,11 @@ public class ViewHandler extends Application {
     private Stage primaryStage;
     private ViewMenuPrincipal mp;
     private ViewMenuOptions mo;
+    private ViewMenuChoixVaisseaux mcv;
     private Menu model;
-    private Menu model2;
     private ControllerMenu controllerMenu;
-    private Button btn;
-    private Button btn2;
-    private Button btn3;
-    private Button btn4;
-    private Button V1;
-
-    //private ImageView icon;
-    //private String texteB;
+    private Group root;
+    private ControllerOptions controllerOptions;
 
 
     /**
@@ -43,21 +38,18 @@ public class ViewHandler extends Application {
 
         // root représente le panel qui va être affiché : tout ce qui doit être affiché doit lui être ajouté
 
-//----------------------------------------------------------------------------------------------------------------------
-//Vue Menu Principal
-//----------------------------------------------------------------------------------------------------------------------
-
-
-
-
-        Group root = new Group();
+        root = new Group();
         Scene scene = new Scene(root);
 
         model = new Menu();
 
+        mo = new ViewMenuOptions(model, root);
         mp = new ViewMenuPrincipal(model, root);
+        mcv = new ViewMenuChoixVaisseaux(model, root);
 
         controllerMenu = new ControllerMenu(this, model);
+
+        //LunchMenuPrincipale();
 
         // Affichage du menu
 
@@ -69,60 +61,14 @@ public class ViewHandler extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.show();
         startMainMenuMusic();
-
-
-        btn = initButton(70, 180, "Jouer ");
-        btn4 = initButton(70, 255, "Quitter");
-        btn2 = initButton(70, 250, "Retour");
-        V1 = Vbutton(450, 250);
-
-        btn2.setOnAction(event -> primaryStage.setScene(scene));
-        btn4.setOnAction(event -> primaryStage.close());
-        btn.setOnMouseEntered(mouseEvent -> Piou());
-        btn2.setOnMouseEntered(mouseEvent -> Piou());
-
-        btn4.setOnMouseEntered(mouseEvent -> Piou());
-
-
-
-
-        root.getChildren().add(btn);
-
-        root.getChildren().add(btn4);
-
-
-//----------------------------------------------------------------------------------------------------------------------
-// Vue du menu Option
-//----------------------------------------------------------------------------------------------------------------------
-
-        Group root2 = new Group();
-        Scene scene2 = new Scene(root2);
-
-        btn3 = initButton(70, 330, "Option");
-
-        btn3.setOnMouseEntered(mouseEvent -> Piou());
-        btn3.setOnAction(event -> primaryStage.setScene(scene2));
-        root.getChildren().add(btn3);
-        model2 = new Menu();
-
-
-
-        mo = new ViewMenuOptions(model2, root2);
-        controllerMenu = new ControllerMenu(this, model2);
-        // Affichage du menu
-
-
-        root2.getChildren().add(btn2);
-        root2.getChildren().add(V1);
-
     }
-
 
     public void setEventHandlerMenu(ControllerMenu cm) {
         mp.setEvents(cm);
+        mo.setEvents(cm);
+        mcv.setEvents(cm);
     }
 
-    // GETTERS AND SETTERS
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -130,40 +76,43 @@ public class ViewHandler extends Application {
     public ViewMenuPrincipal getMp() {
         return mp;
     }
-    public Button initButton(int longeur, int largeur, String texteB) {
 
-        ImageView icon = new ImageView("Asset/Images/btn1.png");
-        // Création d'un bouton
-        Button b = new Button();
-        b.setGraphic(icon);
-        b.setLayoutX(longeur);
-        b.setLayoutY(largeur);
-        b.setText(texteB);
-
-       /* b.setFont(buttonFont);*/
-
-        return b;
+    public ViewMenuOptions getMo(){
+        return mo;
+    }
+    public ViewMenuChoixVaisseaux getMcv(){
+        return mcv;
     }
 
+    public void setVueCompleteOptions() {
+        mo.setVueCompleteOptions();
+    }
 
-    public Button Vbutton(int longeur, int largeur ) {
+    public void setVueCompleteMenu(){
+        mp.setVueCompleteMenu();
+    }
 
-
-        ImageView icon = new ImageView("Asset/Images/aegisGladius.png");
-        // Création d'un bouton
-        Button b = new Button();
-        b.setGraphic(icon);
-        b.setLayoutX(longeur);
-        b.setLayoutY(largeur);
-        //b.setText(texteB);
-
-        /* b.setFont(buttonFont);*/
-
-        return b;
+    public void setVueCompleteChoixVaisseaux(){
+        mcv.setImgBGChoixV();
     }
 
 
 
 
+/*
+  public void LunchMenuPrincipale(){
 
+        model = new Menu();
+
+        mp = new ViewMenuPrincipal(model, root);
+        controllerMenu = new ControllerMenu(this, model);
+
+    }
+
+    public void LunchMenuOptions(){
+
+        mo = new ViewMenuOptions(model, root);
+        controllerMenu = new ControllerMenu(this, model);
+
+    }*/
 }

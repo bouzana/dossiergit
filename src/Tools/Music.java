@@ -6,8 +6,8 @@ import javafx.scene.media.MediaPlayer;
 import java.nio.file.Paths;
 
 public class Music {
-    private static final String MAIN_MENU_THEME = "D:\\documents\\FORMATION\\COUR JAVA\\projet\\test1/src/Asset/Sons/menuSong.mp3";
-    private static final String PIOU = "D:\\documents\\FORMATION\\COUR JAVA\\projet\\test1\\src\\Asset\\Sons\\sonBtn.mp3";
+    private static final String MAIN_MENU_THEME = "C:\\Users\\e1804065\\IdeaProjects\\starCityFrag\\src\\Asset\\Sons/menuSong.mp3";
+    private static final String PIOU = "C:\\Users\\e1804065\\IdeaProjects\\starCityFrag\\src\\Asset\\Sons/sonBtn.mp3";
     private static MediaPlayer mediaPlayer;
     private static MediaPlayer mediaPlayer1;
 
