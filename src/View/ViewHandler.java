@@ -25,8 +25,10 @@ public class ViewHandler extends Application {
     private Button btn2;
     private Button btn3;
     private Button btn4;
-    private ImageView icon;
-    private String texteB;
+    private Button V1;
+
+    //private ImageView icon;
+    //private String texteB;
 
 
     /**
@@ -69,9 +71,10 @@ public class ViewHandler extends Application {
         startMainMenuMusic();
 
 
-        btn = initButton(100, 150, "Jouer");
-        btn4 = initButton(100, 200, "Quitter");
-        btn2 = initButton(100, 250, "Retour");
+        btn = initButton(70, 180, "Jouer ");
+        btn4 = initButton(70, 255, "Quitter");
+        btn2 = initButton(70, 250, "Retour");
+        V1 = Vbutton(450, 250);
 
         btn2.setOnAction(event -> primaryStage.setScene(scene));
         btn4.setOnAction(event -> primaryStage.close());
@@ -95,7 +98,8 @@ public class ViewHandler extends Application {
         Group root2 = new Group();
         Scene scene2 = new Scene(root2);
 
-        btn3 = initButton(100, 300, "Option");
+        btn3 = initButton(70, 330, "Option");
+
         btn3.setOnMouseEntered(mouseEvent -> Piou());
         btn3.setOnAction(event -> primaryStage.setScene(scene2));
         root.getChildren().add(btn3);
@@ -109,6 +113,7 @@ public class ViewHandler extends Application {
 
 
         root2.getChildren().add(btn2);
+        root2.getChildren().add(V1);
 
     }
 
@@ -127,13 +132,6 @@ public class ViewHandler extends Application {
     }
     public Button initButton(int longeur, int largeur, String texteB) {
 
-       /* Image image;
-        image = new Image(getClass().getResource("Asset/Images/btn1.png").toExternalForm());
-        ImageView icon = new ImageView(image);*/
-
-
-       /* Font buttonFont = Font.loadFont(getClass().getResource(
-                "/Asset/Images/btn1.png").toExternalForm(), 30);*/
         ImageView icon = new ImageView("Asset/Images/btn1.png");
         // Création d'un bouton
         Button b = new Button();
@@ -143,6 +141,23 @@ public class ViewHandler extends Application {
         b.setText(texteB);
 
        /* b.setFont(buttonFont);*/
+
+        return b;
+    }
+
+
+    public Button Vbutton(int longeur, int largeur ) {
+
+
+        ImageView icon = new ImageView("Asset/Images/aegisGladius.png");
+        // Création d'un bouton
+        Button b = new Button();
+        b.setGraphic(icon);
+        b.setLayoutX(longeur);
+        b.setLayoutY(largeur);
+        //b.setText(texteB);
+
+        /* b.setFont(buttonFont);*/
 
         return b;
     }
