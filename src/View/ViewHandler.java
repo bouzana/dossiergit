@@ -1,29 +1,34 @@
 package View;
 
+import Controller.ControllerGameScene;
 import Controller.ControllerMenu;
-import Controller.ControllerOptions;
+import Model.GameScene;
 import Model.Menu;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
 import static Tools.Music.startMainMenuMusic;
-import static Tools.Music.Piou;
 
 public class ViewHandler extends Application {
     private Stage primaryStage;
     private ViewMenuPrincipal mp;
     private ViewMenuOptions mo;
     private ViewMenuChoixVaisseaux mcv;
+
     private Menu model;
+    private GameScene modelS;
     private ControllerMenu controllerMenu;
+    private ControllerGameScene controllerGs;
     private Group root;
-    private ControllerOptions controllerOptions;
+
+
+    //private ControllerOptions controllerOptions;
+    private ViewGameScene vgs;
+
 
 
     /**
@@ -42,12 +47,17 @@ public class ViewHandler extends Application {
         Scene scene = new Scene(root);
 
         model = new Menu();
+        modelS = new GameScene();
 
         mo = new ViewMenuOptions(model, root);
         mp = new ViewMenuPrincipal(model, root);
         mcv = new ViewMenuChoixVaisseaux(model, root);
 
+
+
         controllerMenu = new ControllerMenu(this, model);
+        controllerGs = new ControllerGameScene(this, modelS);
+        scene.setOnKeyPressed(this.controllerGs);
 
         //LunchMenuPrincipale();
 
@@ -63,10 +73,21 @@ public class ViewHandler extends Application {
         startMainMenuMusic();
     }
 
+
+
     public void setEventHandlerMenu(ControllerMenu cm) {
         mp.setEvents(cm);
         mo.setEvents(cm);
         mcv.setEvents(cm);
+
+    }
+
+    public ViewGameScene getVgs() {
+        return vgs;
+    }
+
+    public void setVgs(ViewGameScene vgs) {
+        this.vgs = vgs;
     }
 
     public Stage getPrimaryStage() {
@@ -84,16 +105,29 @@ public class ViewHandler extends Application {
         return mcv;
     }
 
+
     public void setVueCompleteOptions() {
         mo.setVueCompleteOptions();
     }
 
-    public void setVueCompleteMenu(){
+    public void setVueCompleteMenu() {
         mp.setVueCompleteMenu();
     }
 
-    public void setVueCompleteChoixVaisseaux(){
+    public void setVueCompleteChoixVaisseaux() {
         mcv.setImgBGChoixV();
+    }
+
+
+
+
+
+    public void setVueGameScene(String typeV){
+        vgs = new ViewGameScene(modelS, root, typeV);
+        vgs.setVueGameScene();
+        controllerGs.GameTLStart();
+
+
     }
 
 
